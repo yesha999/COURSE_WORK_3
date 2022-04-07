@@ -24,7 +24,6 @@ class UsersService:
 
         user = self.schema.dump(self.dao.get_by_email(email))
         user.pop('password')
-        user.pop('id')
         return user
 
     def update(self, email: str, data: Dict[str, Any]):

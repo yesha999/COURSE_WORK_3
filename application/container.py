@@ -1,16 +1,19 @@
 from application.dao.directors import DirectorsDAO
+from application.dao.favorites import FavoritesDAO
 from application.dao.genres import GenresDAO
 from application.dao.movies import MoviesDAO
 from application.dao.users import UsersDAO
 from application.database import db
 from application.services.auth import AuthService
 from application.services.directors import DirectorsService
+from application.services.favorites import FavoritesService
 from application.services.genres import GenresService
-from application.services.movies import MoviesService
 from application.services.helpers.schemas.director import DirectorSchema
+from application.services.helpers.schemas.favorite import FavoriteSchema
 from application.services.helpers.schemas.genre import GenreSchema
 from application.services.helpers.schemas.movie import MovieSchema
 from application.services.helpers.schemas.user import UserSchema
+from application.services.movies import MoviesService
 from application.services.users import UsersService
 
 movies_schema = MovieSchema()
@@ -28,5 +31,9 @@ directors_service = DirectorsService(directors_dao, directors_schema)
 users_schema = UserSchema()
 users_dao = UsersDAO(db.session)
 users_service = UsersService(users_dao, users_schema)
+
+favorites_schema = FavoriteSchema()
+favorites_dao = FavoritesDAO(db.session)
+favorites_service = FavoritesService(favorites_dao, favorites_schema)
 
 auth_service = AuthService(users_dao)
